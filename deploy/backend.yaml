@@ -24,6 +24,13 @@ spec:
         env:
         - name: DATABASE_URI
           value: pg-service
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "256m"
 ---
 apiVersion: v1
 kind: Service

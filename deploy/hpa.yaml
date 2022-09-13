@@ -1,21 +1,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: backend-hpa
-  namespace: example
-spec:
-  scaleTargetRef:
-    kind: Deployment
-    name: backend
-    apiVersion: apps/v1
-  minReplicas: 2
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
----
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: frontend-hpa
+  name: frontend
   namespace: example
 spec:
   scaleTargetRef:
@@ -24,4 +10,27 @@ spec:
     apiVersion: apps/v1
   minReplicas: 2
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 50
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend
+  namespace: example
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: backend
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
