@@ -26,8 +26,8 @@ spec:
           value: pg-service
         resources:
           requests:
-            memory: "100Mi"
-            cpu: "100m"
+            memory: "128Mi"
+            cpu: "128m"
           limits:
             memory: "256Mi"
             cpu: "256m"
