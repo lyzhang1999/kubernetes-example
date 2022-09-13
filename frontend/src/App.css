@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  padding: 20px 0 40px 0;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: auto;
+  text-align: center;
+  font-size: calc(10px + 1vmin);
+  justify-content: center;
+}
+
+.Grid-Item {
+  padding: 0px 50px 20px 50px;
+}
+
+.Grid-Item button {
+  font-size: calc(10px + 1vmin);  
+}
+
+.Grid-Item input {
+  font-size: calc(10px + 1vmin);  
+}
+
