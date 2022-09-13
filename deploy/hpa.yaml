@@ -13,8 +13,10 @@ spec:
   metrics:
     - type: Resource
       resource:
-        name: cpu
-        targetAverageUtilization: 50
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
@@ -31,5 +33,7 @@ spec:
   metrics:
     - type: Resource
       resource:
-        name: cpu
-        targetAverageUtilization: 50
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
