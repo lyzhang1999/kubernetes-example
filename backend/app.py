@@ -25,13 +25,23 @@ class Text(db.Model):
     def __repr__(self):
         return f"<Text {self.text}>"
 
+
 @app.route('/healthy')
 def healthy():
     return {"healthy": True}, 200
 
+
 @app.route('/host_name')
 def host_name():
     return {"host_name": os.environ.get('HOSTNAME')}, 200
+
+
+@app.route('/eat_memory')
+def eat_memory():
+    while True:
+        bytearray(512000000)
+    return {"ok": True}, 200
+
 
 @app.route('/fetch')
 def fetch():
