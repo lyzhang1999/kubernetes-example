@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
+import os, subprocess
 from flask import request
 
 app = Flask(__name__)
@@ -32,6 +32,11 @@ def healthy():
 @app.route('/host_name')
 def host_name():
     return {"host_name": os.environ.get('HOSTNAME')}, 200
+
+@app.route('/ab')
+def ab():
+    subprocess.run(["ab", "-c", "50", "-n", "10000", "http://127.0.0.1:5000/"])
+    return {"ab": True}, 200
 
 @app.route('/fetch')
 def fetch():
