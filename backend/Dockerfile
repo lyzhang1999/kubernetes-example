@@ -2,9 +2,9 @@
 
 FROM python:3.8-slim-buster
 
-RUN sed -i 's#http://deb.debian.org#http://mirrors.aliyun.com/#g' /etc/apt/sources.list \
-&& apt-get clean \
-&& apt-get update && apt-get install -y libpq-dev gcc vim && rm -rf /var/lib/apt/lists/*
+#RUN sed -i 's#http://deb.debian.org#http://mirrors.aliyun.com/#g' /etc/apt/sources.list && apt-get clean
+
+RUN apt-get update && apt-get install -y libpq-dev gcc vim apache2-utils && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
