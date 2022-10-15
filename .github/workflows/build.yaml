@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -28,10 +31,10 @@ jobs:
         with:
           context: backend
           push: true
-          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${{ env.GITHUB_SHA::7 }}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${{ steps.vars.outputs.sha_short }}
       - name: Build frontend and push
         uses: docker/build-push-action@v3
         with:
           context: frontend
           push: true
-          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${{ env.GITHUB_SHA::7 }}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${{ steps.vars.outputs.sha_short }}
