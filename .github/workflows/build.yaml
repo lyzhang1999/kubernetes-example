@@ -5,6 +5,9 @@ on:
     branches:
       - 'main'
 
+env:
+  DOCKERHUB_USERNAME: lyzhang1999
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -18,17 +21,17 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build backend and push
         uses: docker/build-push-action@v3
         with:
           context: backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend:${GITHUB_SHA::7}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${GITHUB_SHA::7}
       - name: Build frontend and push
         uses: docker/build-push-action@v3
         with:
           context: frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${GITHUB_SHA::7}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${GITHUB_SHA::7}
