@@ -28,10 +28,10 @@ jobs:
         with:
           context: backend
           push: true
-          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${GITHUB_SHA::7}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${{ env.GITHUB_SHA::7 }}
       - name: Build frontend and push
         uses: docker/build-push-action@v3
         with:
           context: frontend
           push: true
-          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${GITHUB_SHA::7}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${{ env.GITHUB_SHA::7 }}
