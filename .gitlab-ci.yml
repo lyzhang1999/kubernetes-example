@@ -13,7 +13,7 @@ services:
 before_script:
   - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
 
-build:
+build_and_push:
   stage: build
   script:
     - docker build -t $DOCKERHUB_USERNAME/frontend:$CI_COMMIT_SHORT_SHA ./frontend
