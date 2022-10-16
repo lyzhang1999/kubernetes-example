@@ -1,6 +1,6 @@
 stages:
   - build
-  
+
 image: docker:20.10.16
 
 variables:
@@ -11,7 +11,7 @@ services:
   - docker:20.10.16-dind
 
 before_script:
-  - docker login -u lyzhang1999 -p $DOCKERHUB_TOKEN
+  - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
 
 build:
   stage: build
