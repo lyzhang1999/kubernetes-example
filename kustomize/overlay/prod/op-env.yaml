@@ -1,0 +1,15 @@
+- op: replace
+  path: /spec/template/spec/containers/0/env/0
+  value:
+    name: DATABASE_URI
+    value: 10.10.10.10
+- op: replace
+  path: /spec/template/spec/containers/0/env/1
+  value:
+    name: DATABASE_USERNAME
+    value: external_postgres
+- op: replace
+  path: /spec/template/spec/containers/0/env/2
+  value:
+    name: DATABASE_PASSWORD
+    value: external_postgres

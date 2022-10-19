@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  template:
+    spec:
+      containers:
+      - name: flask-backend
+        env:
+        - name: DATABASE_URI
+          value: "10.10.10.10"
+        - name: DATABASE_USERNAME
+          value: external_postgres
+        - name: DATABASE_PASSWORD
+          value: external_postgres
