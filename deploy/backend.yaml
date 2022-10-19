@@ -23,6 +23,10 @@ spec:
         env:
         - name: DATABASE_URI
           value: pg-service
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: DATABASE_PASSWORD
+          value: postgres
         resources:
           requests:
             memory: "128Mi"

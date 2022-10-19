@@ -9,7 +9,9 @@ app = Flask(__name__)
 # This keeps the warning messages away
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db_uri = os.environ.get('DATABASE_URI')
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@" + \
+db_username = os.environ.get('DATABASE_URI')
+db_password = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://"+ db_username +":"+ db_password +"@" + \
     db_uri+"/postgres"
 
 db = SQLAlchemy(app)
