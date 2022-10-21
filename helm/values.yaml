@@ -1,0 +1,17 @@
+frontend:
+  image: lyzhang1999/frontend
+  tag: latest
+  autoscaling:
+    averageUtilization: 90
+
+backend:
+  image: lyzhang1999/backend
+  tag: latest
+  autoscaling:
+    averageUtilization: 90
+
+database:
+  enabled: true
+  uri: pg-service
+  username: postgres
+  password: postgres
