@@ -1,6 +1,6 @@
 frontend:
   image: lyzhang1999/frontend
-  tag: e571731
+  tag: latest
   autoscaling:
     averageUtilization: 90
 backend:
