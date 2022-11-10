@@ -46,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Hi! I am a geekbang kuebrnetes example application!
+        Hi! I am GitOps workflow!
       </header>
       <div className="Grid">
         <div className="Grid-Item">
