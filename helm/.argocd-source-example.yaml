@@ -4,7 +4,7 @@ helm:
     value: lyzhang1999/frontend
     forcestring: true
   - name: frontend.tag
-    value: 152965f
+    value: "2682590"
     forcestring: true
   - name: backend.image
     value: lyzhang1999/backend
