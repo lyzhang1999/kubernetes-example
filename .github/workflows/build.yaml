@@ -40,16 +40,16 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${{ steps.vars.outputs.sha_short }}
-      - name: Update helm values.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          valueFile: 'helm/values.yaml'
-          commitChange: true
-          branch: main
-          updateFile: true
-          message: 'Update Image Version to ${{ steps.vars.outputs.sha_short }}'
-          changes: |
-            {
-              "backend.tag": "${{ steps.vars.outputs.sha_short }}",
-              "frontend.tag": "${{ steps.vars.outputs.sha_short }}"
-            }
+      # - name: Update helm values.yaml
+      #   uses: fjogeleit/yaml-update-action@main
+      #   with:
+      #     valueFile: 'helm/values.yaml'
+      #     commitChange: true
+      #     branch: main
+      #     updateFile: true
+      #     message: 'Update Image Version to ${{ steps.vars.outputs.sha_short }}'
+      #     changes: |
+      #       {
+      #         "backend.tag": "${{ steps.vars.outputs.sha_short }}",
+      #         "frontend.tag": "${{ steps.vars.outputs.sha_short }}"
+      #       }
