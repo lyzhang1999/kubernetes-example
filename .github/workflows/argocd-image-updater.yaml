@@ -17,6 +17,10 @@ jobs:
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: branch
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -32,11 +36,11 @@ jobs:
           context: backend
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${GITHUB_REF##*/}-${{ steps.vars.outputs.sha_short }}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/backend:${{ steps.branch.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
       - name: Build frontend and push
         uses: docker/build-push-action@v3
         with:
           context: frontend
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${GITHUB_REF##*/}-${{ steps.vars.outputs.sha_short }}
+          tags: ${{ env.DOCKERHUB_USERNAME }}/frontend:${{ steps.branch.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
