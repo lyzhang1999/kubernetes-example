@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: "frontend"
+  name: frontend
+  namespace: argocd
 spec:
   generators:
   - git:
