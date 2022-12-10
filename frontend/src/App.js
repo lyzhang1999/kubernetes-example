@@ -46,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Hi! I'm from {process.env.NAMESPACES} namespace!
+        Hi! I'm from {process.env.NAMESPACES} namespaces!
       </header>
       <div className="Grid">
         <div className="Grid-Item">

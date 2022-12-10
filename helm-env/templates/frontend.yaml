@@ -22,7 +22,7 @@ spec:
         - containerPort: 3000
         env:
         - name: NAMESPACES
-          values: {{ .Release.Namespace }}
+          value: {{ .Release.Namespace }}
 
 ---
 apiVersion: v1
