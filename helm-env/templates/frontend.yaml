@@ -18,11 +18,10 @@ spec:
       - name: react-frontend
         image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
         imagePullPolicy: Always
-        command: ["sh", "-c", "NAMESPACES={{ .Release.Namespace }} && yarn start"]
         ports:
         - containerPort: 3000
         env:
-        - name: NAMESPACES
+        - name: REACT_APP_NAMESPACES
           value: {{ .Release.Namespace }}
 
 ---
