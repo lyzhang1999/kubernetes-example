@@ -16,6 +16,7 @@ spec:
       containers:
       - name: sample-spring
         image: ghcr.io/lyzhang1999/sample-kotlin-spring:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: http
