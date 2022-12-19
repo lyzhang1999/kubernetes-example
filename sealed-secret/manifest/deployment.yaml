@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-spring
+spec:
+  selector:
+    matchLabels:
+      app: sample-spring
+  template:
+    metadata:
+      labels:
+        app: sample-spring
+    spec:
+      imagePullSecrets:
+      - name: github-regcred
+      containers:
+      - name: sample-spring
+        image: ghcr.io/lyzhang1999/sample-kotlin-spring:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: sample-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-spring
+spec:
+  type: ClusterIP
+  selector:
+    app: sample-spring
+  ports:
+  - port: 8080
+    name: http

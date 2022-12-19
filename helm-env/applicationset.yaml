@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: frontend
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: "https://github.com/lyzhang1999/kubernetes-example.git"
+      revision: HEAD
+      files:
+      - path: "helm-env/env/*/values.yaml"
+  template:
+    metadata:
+      name: "{{path.basename}}"
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/lyzhang1999/kubernetes-example.git"
+        targetRevision: HEAD
+        path: "helm-env"
+        helm:
+          valueFiles:
+          - "env/{{path.basename}}/values.yaml"
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
