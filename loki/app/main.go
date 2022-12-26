@@ -2,14 +2,16 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"net/http"
 	"time"
+
 	"github.com/sirupsen/logrus"
-	"math/rand"
 )
 
 func main() {
 	http.Handle("/ping", WithLogging(pingHandler()))
+	http.Handle("/http", WithLogging(httpHandler()))
 
 	addr := "0.0.0.0:8080"
 	logrus.WithField("addr", addr).Info("starting server")
@@ -22,6 +24,17 @@ func pingHandler() http.Handler {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 		_, _ = fmt.Fprintf(rw, "pong")
+	}
+	return http.HandlerFunc(fn)
+}
+
+func httpHandler() http.Handler {
+	fn := func(rw http.ResponseWriter, r *http.Request) {
+		rand.Seed(time.Now().Unix())
+		var resCodeArray = [...]int{200, 400, 500}
+		resCode := resCodeArray[rand.Intn(len(resCodeArray))]
+		rw.WriteHeader(resCode)
+		_, _ = fmt.Fprintf(rw, "OK!")
 	}
 	return http.HandlerFunc(fn)
 }
@@ -68,7 +81,7 @@ func WithLogging(h http.Handler) http.Handler {
 		duration := time.Since(start)
 
 		logrus.SetFormatter(&logrus.TextFormatter{})
-		
+
 		rand.Seed(time.Now().Unix())
 		var resCodeArray = [...]int{200, 400, 500}
 		resCode := resCodeArray[rand.Intn(len(resCodeArray))]
@@ -80,7 +93,7 @@ func WithLogging(h http.Handler) http.Handler {
 			"duration": duration,
 			"size":     responseData.size,
 		}).Info("request completed")
-		
+
 		logrus.SetFormatter(&logrus.JSONFormatter{})
 
 		logrus.WithFields(logrus.Fields{
