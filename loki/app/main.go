@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 	"github.com/sirupsen/logrus"
+	"math/rand"
 )
 
 func main() {
@@ -67,11 +68,15 @@ func WithLogging(h http.Handler) http.Handler {
 		duration := time.Since(start)
 
 		logrus.SetFormatter(&logrus.TextFormatter{})
+		
+		rand.Seed(time.Now().Unix())
+		var resCodeArray = [...]int{200, 400, 500}
+		resCode := resCodeArray[rand.Intn(len(resCodeArray))]
 
 		logrus.WithFields(logrus.Fields{
 			"uri":      req.RequestURI,
 			"method":   req.Method,
-			"status":   responseData.status,
+			"status":   resCode,
 			"duration": duration,
 			"size":     responseData.size,
 		}).Info("request completed")
@@ -81,7 +86,7 @@ func WithLogging(h http.Handler) http.Handler {
 		logrus.WithFields(logrus.Fields{
 			"uri":      req.RequestURI,
 			"method":   req.Method,
-			"status":   responseData.status,
+			"status":   resCode,
 			"duration": duration,
 			"size":     responseData.size,
 		}).Info("request completed")
