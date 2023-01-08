@@ -21,10 +21,10 @@ spec:
           resources:
             requests:
               memory: "128Mi"
-              cpu: "128m"
+              cpu: "64m"
             limits:
               memory: "128Mi"
-              cpu: "128m"
+              cpu: "100m"
           ports:
             - containerPort: 8080
           readinessProbe:
