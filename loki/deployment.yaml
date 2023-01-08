@@ -18,6 +18,13 @@ spec:
         - name: go-backend
           image: lyzhang1999/log-example:latest
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "128m"
+            limits:
+              memory: "128Mi"
+              cpu: "128m"
           ports:
             - containerPort: 8080
           readinessProbe:
